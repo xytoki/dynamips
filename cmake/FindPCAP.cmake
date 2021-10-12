@@ -46,7 +46,7 @@
 #  PCAP_INCLUDE_DIRS - where to find pcap.h, etc.
 #  PCAP_LIBRARIES   - List of libraries when using pcap.
 #  PCAP_FOUND       - True if pcap found.
-
+SET(CMAKE_FIND_LIBRARY_SUFFIXES ".lib" ".so" ".a")
 
 IF(EXISTS $ENV{PCAPDIR})
   FIND_PATH(PCAP_INCLUDE_DIR 

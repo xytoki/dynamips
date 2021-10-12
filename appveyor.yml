@@ -11,17 +11,17 @@ environment:
         - CYG_ARCH: x86
 
 install:
+    - 'cinst 7zip.commandline'
     - 'appveyor DownloadFile http://cygwin.com/setup-%CYG_ARCH%.exe -FileName setup.exe'
     - 'setup.exe -qnNdO -R "%CYG_ROOT%" -s "%CYG_MIRROR%" -l "%CYG_CACHE%" -P make -P gcc-core -P cmake >NUL'
     - '%CYG_ROOT%/bin/bash -lc "cd $APPVEYOR_BUILD_FOLDER/libelf-0.8.13 && ./configure && make && make install'
-    - 'cinst 7zip.commandline'
-    - 'cinst winpcap'
-    - 'appveyor DownloadFile http://www.winpcap.org/install/bin/WpdPack_4_1_2.zip'
+    - 'appveyor DownloadFile https://nmap.org/npcap/dist/npcap-sdk-1.11.zip'
     - 'dir'
-    - '7za x .\WpdPack_4_1_2.zip -o.'
-    - 'xcopy .\WpdPack\Lib\libwpcap.a C:\cygwin\lib'
-    - 'xcopy .\WpdPack\Lib\libpacket.a C:\cygwin\lib'
-    - 'xcopy /Y /E .\WpdPack\Include\*.* C:\cygwin\usr\include\'
+    - 'mkdir npcap-sdk'
+    - '7za x .\npcap-sdk-1.11.zip -o./npcap-sdk'
+    - 'xcopy .\npcap-sdk\Lib\wpcap.lib C:\cygwin\lib'
+    - 'xcopy .\npcap-sdk\Lib\Packet.lib C:\cygwin\lib'
+    - 'xcopy /Y /E .\npcap-sdk\Include\*.* C:\cygwin\usr\include\'
 
 build_script:
     - '%CYG_ROOT%/bin/bash -lc "ls $APPVEYOR_BUILD_FOLDER'
