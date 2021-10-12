@@ -28,6 +28,8 @@ build_script:
     - '%CYG_ROOT%/bin/bash -lc "cd $APPVEYOR_BUILD_FOLDER && mkdir -p build'
     - '%CYG_ROOT%/bin/bash -lc "cd $APPVEYOR_BUILD_FOLDER/build && cmake ..'
     - '%CYG_ROOT%/bin/bash -lc "cd $APPVEYOR_BUILD_FOLDER/build && make'
+    - 'xcopy C:\cygwin\bin\cygwin1.dll .\build\stable'
 
 artifacts:
   - path: 'build/stable/dynamips.exe'
+  - path: 'build/stable/cygwin1.dll'
